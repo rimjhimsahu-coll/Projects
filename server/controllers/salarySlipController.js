@@ -33,7 +33,7 @@ async function calculatePay(employeeId, month, year) {
   const otherAllowance = employee.otherAllowance || 0;
 
   const grossEarnings = earnedBasic + hra + transportation + otherAllowance;
-  const pf = Math.round(employee.basicSalary * PF_RATE);
+  const pf = employee.pfEnabled ? Math.round(employee.basicSalary * PF_RATE) : 0;
   const netPay = Math.round(grossEarnings - pf);
 
   return {

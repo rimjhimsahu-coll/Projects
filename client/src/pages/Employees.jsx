@@ -17,6 +17,7 @@ const emptyForm = {
   hra: "",
   transportation: "",
   otherAllowance: "",
+  pfEnabled: false, 
 };
 
 export default function Employees() {
@@ -63,6 +64,7 @@ export default function Employees() {
         hra: form.hra ? Number(form.hra) : 0,
         transportation: form.transportation ? Number(form.transportation) : 0,
         otherAllowance: form.otherAllowance ? Number(form.otherAllowance) : 0,
+        pfEnabled: form.pfEnabled,
       });
       setForm(emptyForm);
       setError("");
@@ -165,6 +167,21 @@ export default function Employees() {
               <label>Other Allowance</label>
               <input name="otherAllowance" type="number" value={form.otherAllowance} onChange={handleChange} placeholder="0" />
             </div>
+            <p className="employees__section-title">PF Settings</p>
+<div className="employees__form-grid">
+  <div className="form-field">
+    <label>
+      <input
+        type="checkbox"
+        name="pfEnabled"
+        checked={form.pfEnabled}
+        onChange={(e) => setForm({ ...form, pfEnabled: e.target.checked })}
+        style={{ marginRight: 6 }}
+      />
+      PF Applicable
+    </label>
+  </div>
+</div>
           </div>
 
           <button className="btn-primary" onClick={handleAdd} style={{ marginTop: 8 }}>
@@ -199,6 +216,7 @@ export default function Employees() {
                   <td>{emp.designation}</td>
                   <td>₹{emp.basicSalary.toLocaleString()}</td>
                   <td>{totalAllowance > 0 ? `₹${totalAllowance.toLocaleString()}` : "—"}</td>
+                  <td>{emp.pfEnabled ? "Yes" : "No"}</td>
                   <td>{emp.bankDetails?.bankName || "—"}</td>
                   <td>
                     <button onClick={() => handleDelete(emp._id)} style={{ border: "none", background: "none", color: "#dc2626", cursor: "pointer", fontSize: 13 }}>
