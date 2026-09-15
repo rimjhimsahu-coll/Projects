@@ -13,7 +13,7 @@ After deployment, verify `https://<render-service>.onrender.com/health` returns 
 
 ## Client: Vercel
 
-Import the same repository into Vercel and leave its root directory as the repository root. The root `vercel.json` builds the React app in `client` and serves `client/build` with SPA routing.
+Import the same repository into Vercel and set **Root Directory** to `client`. The Vercel configuration builds `client/build` and serves it with SPA routing. Do not set a build command such as `cd client && npm run build`, because commands already run inside `client`.
 
 In Vercel, add this environment variable for **Production** (and Preview if needed):
 
