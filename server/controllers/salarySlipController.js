@@ -2,7 +2,7 @@ const Employee = require("../models/Employee");
 const Attendance = require("../models/Attendance");
 const SalarySlip = require("../models/SalarySlip");
 
-const PF_RATE = 0.01;
+// const PF_RATE = 0.01;
 
 async function calculatePay(employeeId, month, year) {
   const employee = await Employee.findOne({ employeeId });

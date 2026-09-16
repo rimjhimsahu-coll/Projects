@@ -166,8 +166,9 @@ export default function Employees() {
             <div className="form-field">
               <label>Other Allowance</label>
               <input name="otherAllowance" type="number" value={form.otherAllowance} onChange={handleChange} placeholder="0" />
-            </div>
-            <p className="employees__section-title">PF Settings</p>
+            </div> 
+              
+            {/* <p className="employees__section-title">PF Settings</p> */}
 <div className="employees__form-grid">
   <div className="form-field">
      <label>PF Percentage (%)</label>

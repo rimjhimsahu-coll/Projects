@@ -18,11 +18,13 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000')
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const isLocalDevelopmentOrigin = (origin) => /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+
 app.use(cors({
   origin(origin, callback) {
     // Requests without an Origin header (health checks, curl, server-to-server)
     // do not need browser CORS protection.
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || isLocalDevelopmentOrigin(origin) || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
     return callback(new Error('Origin not allowed by CORS'));
