@@ -30,7 +30,7 @@ const employeeSchema = new mongoose.Schema(
     hra: { type: Number, default: 0, min: 0 },
     transportation: { type: Number, default: 0, min: 0 },
     otherAllowance: { type: Number, default: 0, min: 0 },
-    pfEnabled: { type: Boolean, default: true }, 
+    pfPercentage: { type: Number, default: 0, min: 0, max: 100 },  
   },
   { timestamps: true }
 );
