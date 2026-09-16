@@ -38,14 +38,25 @@ app.use('/api/salary-slips', salarySlipRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB Connected Successfully!'))
-  .catch((err) => console.log('MongoDB Connection Error:', err));
+  .catch((err) => console.error('MongoDB Connection Error:', err.message));
 
 app.get('/', (req, res) => {
   res.send('Server is Running!');
 });
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+  const databaseConnected = mongoose.connection.readyState === 1;
+  res.status(databaseConnected ? 200 : 503).json({
+    status: databaseConnected ? 'ok' : 'database unavailable',
+  });
+});
+
+app.use((err, req, res, next) => {
+  if (err.message === 'Origin not allowed by CORS') {
+    return res.status(403).json({ message: err.message });
+  }
+  console.error(err);
+  res.status(500).json({ message: 'Internal server error' });
 });
 
 app.listen(PORT, () => {
